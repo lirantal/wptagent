@@ -238,6 +238,7 @@ class WPTAgent(object):
             pass
 
     def wait_for_idle(self, timeout=30):
+        return True
         """Wait for the system to go idle for at least 2 seconds"""
         if (sys.version_info > (3, 0)):
             from time import monotonic
@@ -338,17 +339,17 @@ class WPTAgent(object):
             print("Make sure python 2.7 is available in the path.")
             ret = False
 
-        try:
-            subprocess.check_output('{0} -version'.format(self.image_magick['convert']), shell=True)
-        except Exception:
-            print("Missing convert utility. Please install ImageMagick and make sure it is in the path.")
-            ret = False
+        # try:
+        #     subprocess.check_output('{0} -version'.format(self.image_magick['convert']), shell=True)
+        # except Exception:
+        #     print("Missing convert utility. Please install ImageMagick and make sure it is in the path.")
+        #     ret = False
 
-        try:
-            subprocess.check_output('{0} -version'.format(self.image_magick['mogrify']), shell=True)
-        except Exception:
-            print("Missing mogrify utility. Please install ImageMagick and make sure it is in the path.")
-            ret = False
+        # try:
+        #     subprocess.check_output('{0} -version'.format(self.image_magick['mogrify']), shell=True)
+        # except Exception:
+        #     print("Missing mogrify utility. Please install ImageMagick and make sure it is in the path.")
+        #     ret = False
 
         if platform.system() == "Linux":
             try:
@@ -393,14 +394,14 @@ class WPTAgent(object):
                 ret = False
 
         # Fix Lighthouse install permissions
-        if platform.system() != "Windows" and sys.version_info < (3, 0):
-            from internal.os_util import run_elevated
-            run_elevated('chmod', '-R 777 ~/.config/configstore/')
-            try:
-                import getpass
-                run_elevated('chown', '-R {0}:{0} ~/.config'.format(getpass.getuser()))
-            except Exception:
-                pass
+        # if platform.system() != "Windows" and sys.version_info < (3, 0):
+        #     from internal.os_util import run_elevated
+        #     run_elevated('chmod', '-R 777 ~/.config/configstore/')
+        #     try:
+        #         import getpass
+        #         run_elevated('chown', '-R {0}:{0} ~/.config'.format(getpass.getuser()))
+        #     except Exception:
+        #         pass
 
         # Check for Node 10+
         if self.get_node_version() < 10.0:

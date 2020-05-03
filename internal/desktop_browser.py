@@ -332,6 +332,7 @@ class DesktopBrowser(BaseBrowser):
             self.thread = None
 
     def wait_for_idle(self):
+        return True
         """Wait for no more than 50% of a single core used for 500ms"""
         import psutil
         logging.debug("Waiting for Idle...")

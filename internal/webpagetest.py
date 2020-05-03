@@ -122,6 +122,7 @@ class WebPageTest(object):
         self.profile_dir = os.path.join(self.workdir, 'browser')
         if os.path.isdir(self.workdir):
             try:
+                # logging.debug('not rmtree')
                 shutil.rmtree(self.workdir)
             except Exception:
                 pass
@@ -1138,6 +1139,7 @@ class WebPageTest(object):
                                         os.path.getsize(zipitem['path']))
                             zip_file.write(zipitem['path'], zipitem['name'])
                             try:
+                                # logger.debug('not removing')
                                 os.remove(zipitem['path'])
                             except Exception:
                                 pass
@@ -1153,11 +1155,13 @@ class WebPageTest(object):
         # Clean up so we don't leave directories lying around
         if os.path.isdir(task['dir']):
             try:
+                # logging.debug('not rmtree')
                 shutil.rmtree(task['dir'])
             except Exception:
                 pass
         if task['done'] and os.path.isdir(self.workdir):
             try:
+                # logging.debug('not rmtree')
                 shutil.rmtree(self.workdir)
             except Exception:
                 pass

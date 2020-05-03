@@ -385,6 +385,10 @@ class DevtoolsBrowser(object):
 
     def collect_browser_metrics(self, task):
         """Collect all of the in-page browser metrics that we need"""
+        # logging.info("Collecting user timing - LIRAN LOG for DEVTOOLS BROWSER!")
+        # liran_data = self.run_js_file('liran.js')
+        # if liran_data is not None:
+        #     task['page_data'].update(liran_data)
         user_timing = self.run_js_file('user_timing.js')
         if user_timing is not None:
             path = os.path.join(task['dir'], task['prefix'] + '_timed_events.json.gz')
